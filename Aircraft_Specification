@@ -1,0 +1,132 @@
+
+#include <iostream>
+#include<cstring>
+using namespace std;
+
+class aircraft_details{
+  protected:  
+    static int prod_count;
+    static char *prod_name;
+    bool flag;
+    public:
+    aircraft_details *next;
+    aircraft_details(){}
+    aircraft_details(char * str)
+    {
+      aircraft_details *temp;
+      temp=(aircraft_details *)malloc(sizeof(aircraft_details));
+      scanf("%s",temp->prod_name);
+      
+       temp->next=hptr;
+       hptr=temp;
+        
+    }
+    aircraft_details *hptr;
+};
+
+class Store_keeper: public aircraft_details{
+
+    public:
+    static void prod_cnt()
+    {
+             prod_count ++;  
+    }
+    
+     void Add_prod(const char *s)
+    {
+        
+       aircraft_details *temp;
+      temp=(aircraft_details *)malloc(sizeof(aircraft_details));
+      scanf("%s",temp->prod_name);
+      
+       temp->next=hptr;
+       hptr=temp;  
+ prod_cnt();
+        
+    }
+    
+    void delet_prod()
+    {
+        prod_count--;
+    }
+    void search_prod(const char *s)
+    {   flag= false;
+        int temp=prod_count;
+        while(temp--)
+        {
+            if (strcmp(prod_name,s)==0)
+        {   
+              cout<<"product is available"<<endl;
+              flag = true;
+        }
+        
+        }
+        if (flag!=true)
+        cout<<"product not available"<<endl;
+    }
+
+    
+        
+    void modify_prod_details(char *prod)
+    {
+        prod_name[0]='s';
+        
+    }
+    
+};
+class Manager : public aircraft_details{
+    void search_prod(const char *s)
+    {   flag= false;
+        int temp=prod_count;
+        while(temp--)
+        {
+            if (strcmp(prod_name,s)==0)
+        {   
+              cout<<"product is available"<<endl;
+              cout<<*prod_name<<endl;
+              flag = true;
+        }
+        
+        }
+        if (flag!=true)
+        cout<<"product not available"<<endl;
+    }
+    
+};
+class Maintenance_Eng :public aircraft_details{
+    void view_prod(const char *s)
+    {
+        int temp=prod_count;
+        while(temp--)
+        {
+            if (strcmp(prod_name,s)==0)
+        {   
+              cout<<"product is available"<<endl;
+              cout<<*prod_name<<endl;
+              flag = true;
+        }
+        
+        }
+        if (flag!=true)
+        cout<<"product not available"<<endl;
+        
+    }
+    
+    
+    
+    
+};
+
+int aircraft_details::prod_count =0;
+char * aircraft_details ::prod_name =0;
+int main()
+{
+Store_keeper store_k;
+char ch;
+char s[100];
+do{
+    scanf("%s", s);
+store_k.Add_prod(s);
+
+scanf(" %c",&ch);
+}while(ch=='y'|| ch=='Y');
